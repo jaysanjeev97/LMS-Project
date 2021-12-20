@@ -49,17 +49,17 @@ public class emp_login {
 		this.emp_email = emp_email;
 		this.emp_password = emp_password;
 	}
-	public emp_login(int emp_id, String emp_password) {
+	public emp_login(String emp_name, String emp_password) {
 		super();
-		this.emp_id = emp_id;
+		this.emp_name = emp_name;
 		this.emp_password = emp_password;
 	}
 
 	
 	
-	public emp_login(String emp_name, String emp_department) {
+	public emp_login(int emp_id, String emp_department) {
 		super();
-		this.emp_name = emp_name;
+		this.emp_id = emp_id;
 		this.emp_department = emp_department;
 	}
 	public emp_login(int emp_id) {

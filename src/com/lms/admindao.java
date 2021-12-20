@@ -68,11 +68,12 @@ public class admindao {
 
 	//UPDATE:
 	public void  updateuser(emp_login e2) throws Exception{
-		String insertQuery="update LMS_EMPLOYEE set  emp_department=? where emp_name=?";
+		String insertQuery="update LMS_EMPLOYEE set  emp_department=? where emp_id=?";
 		Connection con=lms_connection.getConnection();
 		PreparedStatement pstmt= con.prepareStatement(insertQuery);
-		pstmt.setString(1, e2.getEmp_name());
-		pstmt.setString(2, e2.getEmp_department());
+		pstmt.setString(1, e2.getEmp_department());
+		pstmt.setInt(2, e2.getEmp_id());
+		
 
 		int i=pstmt.executeUpdate();
 		System.out.println(i+ "updated");

@@ -31,12 +31,12 @@ public void resister(emp_login log) throws ClassNotFoundException, SQLException 
 
 public boolean login(emp_login user) throws ClassNotFoundException, SQLException {
 	
-	String insertQuery2="select *from LMS_EMPLOYEE where emp_id=? and emp_password=?";
+	String insertQuery2="select *from LMS_EMPLOYEE where emp_name=? and emp_password=?";
 
 	Connection con=lms_connection.getConnection();
 	PreparedStatement pstmt= con.prepareStatement(insertQuery2);
 	
-	pstmt.setInt(1, user.getEmp_id());
+	pstmt.setString(1, user.getEmp_name());
 	pstmt.setString(2, user.getEmp_password());
 	
 	ResultSet rs=pstmt.executeQuery();

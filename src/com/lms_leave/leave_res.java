@@ -9,6 +9,7 @@ public class leave_res {
 	private String reason;
 	private Date from_date;
 	private Date to_date;
+	private int no_ofdays;
 	public int getRequest_id() {
 		return request_id;
 	}
@@ -39,19 +40,31 @@ public class leave_res {
 	public void setTo_date(Date to_date) {
 		this.to_date = to_date;
 	}
+	public int getNo_ofdays() {
+		return no_ofdays;
+	}
+	public void setNo_ofdays(int no_ofdays) {
+		this.no_ofdays = no_ofdays;
+	}
 	public leave_res() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public leave_res(int request_id, int emp_id, String reason, Date from_date, Date to_date) {
+	public leave_res(int request_id, int emp_id, String reason, Date from_date, Date to_date, int no_ofdays) {
 		super();
 		this.request_id = request_id;
 		this.emp_id = emp_id;
 		this.reason = reason;
 		this.from_date = from_date;
 		this.to_date = to_date;
+		this.no_ofdays = no_ofdays;
 	}
-	
+	public leave_res(int emp_id, Date from_date, Date to_date) {
+		super();
+		this.emp_id = emp_id;
+		this.from_date = from_date;
+		this.to_date = to_date;
+	}
 	
 
 }
