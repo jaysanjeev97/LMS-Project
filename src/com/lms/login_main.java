@@ -1,7 +1,19 @@
 package com.lms;
 
+
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
+
+import com.leavestatus.lev_status;
+import com.leavestatus.lev_statusdao;
+import com.lms_leave.Showlevbal;
+import com.lms_leave.leave_res;
+import com.lms_leave.leave_res_dao;
+import com.lms_leave.showlevdao;
 
 public class login_main {
 
@@ -10,8 +22,14 @@ public class login_main {
 
 		admindao admi = new admindao();
 		empdao empy = new empdao();
+		leave_res_dao levres=new leave_res_dao();
+		lev_statusdao levsts=new lev_statusdao();
 
 		Scanner sc = new Scanner(System.in);
+		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+
+		
+		
 		System.out.println("\t ENTER THE LEAVE MANAGAMENT\t");
 		System.out.println("\n 1.resister \n 2.employee login \n 3.admin login  \n 4.exit");
 		int choice = Integer.parseInt(sc.nextLine());
@@ -106,7 +124,56 @@ public class login_main {
 
 			}
 			System.out.println("do you want apply leave");
-			break;
+			
+			System.out.println("enter the apply leave 1.insert\n  2.update\n 3.delete\n 4.insert balleave \nshow balleave");
+			int num1=sc.nextInt();
+			sc.nextLine();
+			switch(num1) {
+			case 1:
+				System.out.println("enter the emp_id");
+				int id1 = Integer.parseInt(sc.nextLine());
+				System.out.println("enter the reason");
+				String reason = sc.nextLine();
+				System.out.println("enter the from_date");
+				String tempdate=sc.nextLine();
+				 Date date=sdf.parse(tempdate);
+				System.out.println("enter the to_date");
+				String tempdate1=sc.nextLine();
+				Date date1=sdf.parse(tempdate1);
+				System.out.println("enter the noofdays");
+				int id2 = Integer.parseInt(sc.nextLine());
+				leave_res leaveres=new leave_res(id1, reason, date, date1, id2);
+				levres.applyLeave(leaveres);
+				break;
+			
+			case 2:
+				System.out.println("enter the emp_id");
+				int id3 = Integer.parseInt(sc.nextLine());
+				System.out.println("enter the from_date");
+				String temp=sc.nextLine();
+				Date dat=sdf.parse(temp);
+				System.out.println("enter the to_date");
+				String temp1=sc.nextLine();
+				Date dat1=sdf.parse(temp1);
+				System.out.println("enter the noofdays");
+				int no = Integer.parseInt(sc.nextLine());
+				
+				leave_res leaveres1=new leave_res(id3, dat, dat1, no);
+				levres.updatelev(leaveres1);
+				break;
+				
+			case 3:
+				System.out.println("enter the request_id");
+				int id4= Integer.parseInt(sc.nextLine());
+				leave_res leaveres2=new leave_res(id4);
+				levres.deleteuser(leaveres2);
+				break;
+			case 4:
+				
+				Showlevbal sb = new Showlevbal(2930,12,10,2);
+				showlevdao sl = new showlevdao();
+				sl.insertleave(sb);
+			}
 
 		case 3:
 			System.out.println("enter the admin login");
@@ -125,8 +192,45 @@ public class login_main {
 				System.out.println("not success");
 
 			}
-
-			System.out.println("enter your choice 1.insert\n 2.update\n 3.delete \n 0.Exit");
+			System.out.println("leave request form");
+			
+			System.out.println(" 1.show leave request\n 2.show leave balance\n 3.update\n 4.delete\n ");
+			int no=sc.nextInt();
+			sc.nextLine();
+			switch(no) {
+			case 1:
+				System.out.println("show leave request");
+				levsts.showLevres();
+				break;
+			case 2:
+				System.out.println("show leave balance");
+				
+				
+				
+				
+				break;
+			case 3:
+				System.out.println("update the leave request ");
+				System.out.println("enter the request_id");
+				int res1= Integer.parseInt(sc.nextLine()); 
+				System.out.println("enter the status ");
+				String status=sc.nextLine();
+				lev_status sts=new lev_status(res1, status);
+				levsts. updatelevs(sts);
+				break;
+				
+			case 4:
+				System.out.println("delete the leave request");
+				System.out.println("enter the leave request_id");
+				int res2=Integer.parseInt(sc.nextLine());
+				lev_status s1=new lev_status(res2);
+				levsts.deletelev(s1);
+				break;
+			
+			}
+			
+            System.out.println("Admin add new employee");
+			System.out.println(" 1.insert\n 2.update\n 3.delete \n 0.Exit");
 			int num = sc.nextInt();
 			sc.nextLine();
 			switch (num) {

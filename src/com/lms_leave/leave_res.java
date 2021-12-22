@@ -68,15 +68,24 @@ public class leave_res {
 		this.no_ofdays = no_ofdays;
 		this.status = status;
 	}
-	public leave_res(int emp_id, Date from_date, Date to_date) {
+	public leave_res(int emp_id, Date from_date, Date to_date,int no_ofdays) {
 		super();
 		this.emp_id = emp_id;
 		this.from_date = from_date;
 		this.to_date = to_date;
+		this.no_ofdays = no_ofdays;
 	}
 	public leave_res(int request_id) {
 		super();
 		this.request_id = request_id;
+	}
+	public leave_res(int emp_id, String reason, Date from_date, Date to_date, int no_ofdays) {
+		super();
+		this.emp_id = emp_id;
+		this.reason = reason;
+		this.from_date = from_date;
+		this.to_date = to_date;
+		this.no_ofdays = no_ofdays;
 	}
 	
 	

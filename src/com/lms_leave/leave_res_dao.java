@@ -10,7 +10,7 @@ public class leave_res_dao {
 	
 	public void applyLeave(leave_res lev ) throws ClassNotFoundException, SQLException {
 		
-		String insertQuery="insert into LEAVE_RES values(?,?,?,?,?)";
+		String insertQuery="insert into LEAVE_RES(emp_id,reason,from_date,to_date,no_ofdays) values(?,?,?,?,?)";
 		Connection con=lms_connection.getConnection();
 		PreparedStatement pstmt= con.prepareStatement(insertQuery);
 		
@@ -26,12 +26,13 @@ public class leave_res_dao {
 		
 		//UPDATE:
 	public void updatelev(leave_res resq) throws ClassNotFoundException, SQLException {
-				String insertQuery="update leave_res set  from_date=?,  to_date =? where emp_id=?";
+				String insertQuery="update leave_res set  from_date=?,  to_date =? ,no_ofdays=? where emp_id=?";
 				Connection con=lms_connection.getConnection();
 				PreparedStatement pstmt= con.prepareStatement(insertQuery);
-				pstmt.setInt(1, resq.getEmp_id());
-				pstmt.setDate(2, new java.sql.Date( resq.getFrom_date().getTime()));
-				pstmt.setDate(3, new java.sql.Date( resq.getTo_date().getTime()));
+				pstmt.setDate(1, new java.sql.Date( resq.getFrom_date().getTime()));
+				pstmt.setDate(2, new java.sql.Date( resq.getTo_date().getTime()));
+				pstmt.setInt(3,resq.getNo_ofdays());
+				pstmt.setInt(4, resq.getEmp_id());
 
 				int i=pstmt.executeUpdate();
 				System.out.println(i+ "updated");
