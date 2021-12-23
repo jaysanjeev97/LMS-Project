@@ -16,6 +16,12 @@ import com.lms_leave.leave_res_dao;
 import com.lms_leave.showlevdao;
 
 public class login_main {
+	
+	 public static int request_id;
+	 public static String status;
+	 public static int res1;
+	 public static int man;
+	 public static int emp_id;
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -24,6 +30,7 @@ public class login_main {
 		empdao empy = new empdao();
 		leave_res_dao levres=new leave_res_dao();
 		lev_statusdao levsts=new lev_statusdao();
+		showlevdao show=new showlevdao();
 
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
@@ -36,7 +43,6 @@ public class login_main {
 		boolean flag = true;
 		boolean flag1 = true;
 
-		int emp_id;
 		String emp_name;
 		String emp_email;
 		String emp_password;
@@ -125,7 +131,7 @@ public class login_main {
 			}
 			System.out.println("do you want apply leave");
 			
-			System.out.println("enter the apply leave 1.insert\n  2.update\n 3.delete\n 4.insert balleave \nshow balleave");
+			System.out.println("\n 1.insert\n 2.update\n 3.delete\n 4.show leave balance");
 			int num1=sc.nextInt();
 			sc.nextLine();
 			switch(num1) {
@@ -169,16 +175,66 @@ public class login_main {
 				levres.deleteuser(leaveres2);
 				break;
 			case 4:
+				System.out.println("leave\n  1.insert\n 2.causal leave\n 3.medical leave\n 4.paid leave\n 5. show leave balance\n");
+				int lev=Integer.parseInt(sc.nextLine()); 
+				sc.nextLine();
+				switch(lev) {
+				case 1:
+					System.out.println("enter employee id");
+					int empid=Integer.parseInt(sc.nextLine());
+					Showlevbal empsh=new Showlevbal(empid, 0, 0, 0, 0, 0);
+					show.insertleave(empsh);
+					break;
+					
+					
+				case 2:
+				System.out.println("enter causal leave");
+				int cleave=Integer.parseInt(sc.nextLine());
+				System.out.println("enter employee id");
+				int lev1=Integer.parseInt(sc.nextLine());
 				
-				Showlevbal sb = new Showlevbal(2930,12,10,2);
-				showlevdao sl = new showlevdao();
-				sl.insertleave(sb);
+				Showlevbal sh=new Showlevbal(cleave, lev);
+				show.updatebal(sh);
+				
+				break;
+				
+				case 3:
+					System.out.println("enter medical leave");
+					int mleave=Integer.parseInt(sc.nextLine());
+					System.out.println("enter employee id");
+					int lev2=Integer.parseInt(sc.nextLine());
+					
+					Showlevbal sh1=new Showlevbal(mleave, lev2, 0);
+					show.updatebal1(sh1);
+					break;
+					
+
+				case 4:
+					System.out.println("enter paid leave");
+					int pleave=Integer.parseInt(sc.nextLine());
+					System.out.println("enter employee id");
+					int lev3=Integer.parseInt(sc.nextLine());
+					
+					Showlevbal sh2=new Showlevbal(lev3, 0, 0, 0, lev3);
+					show.updatebal2(sh2);
+					break;	
+				case 5:
+					
+					System.out.println("enter the employee id");
+					int epid=Integer.parseInt(sc.nextLine());
+					Showlevbal sh3=new Showlevbal(epid);
+					show.showbal(sh3);
+					break;
+				}
+			  
+				
 			}
+			break;
 
 		case 3:
 			System.out.println("enter the admin login");
 			System.out.println("enter manager_id");
-			int man = Integer.parseInt(sc.nextLine());
+			man = Integer.parseInt(sc.nextLine());
 
 			System.out.println("enter your manager_password");
 			String manager_password = sc.nextLine();
@@ -194,40 +250,63 @@ public class login_main {
 			}
 			System.out.println("leave request form");
 			
-			System.out.println(" 1.show leave request\n 2.show leave balance\n 3.update\n 4.delete\n ");
+			System.out.println(" 1.show leave request\n 2.show leave balance\n 3.add employee ");
 			int no=sc.nextInt();
 			sc.nextLine();
 			switch(no) {
 			case 1:
 				System.out.println("show leave request");
-				levsts.showLevres();
+				levres.showLevres();
+			System.out.println("leave request\n 1.update\n 2.exit");
+			int choice2 = sc.nextInt();
+			sc.nextLine();
+			switch (choice2) {
+			case 1:
+				System.out.println("leave  request update \n");
+				System.out.println("enter the status ");
+				status=sc.nextLine();
+				System.out.println("enter the request_id");
+				res1= Integer.parseInt(sc.nextLine()); 
+
+			    lev_status s1=new lev_status(status, res1);
+			    levres.updatestatus(status, res1);
+				break;
+			case 2:	
+				System.out.println("exit");
+				break;
+			}
+				
 				break;
 			case 2:
 				System.out.println("show leave balance");
-				
-				
-				
-				
-				break;
-			case 3:
-				System.out.println("update the leave request ");
-				System.out.println("enter the request_id");
-				int res1= Integer.parseInt(sc.nextLine()); 
-				System.out.println("enter the status ");
-				String status=sc.nextLine();
-				lev_status sts=new lev_status(res1, status);
-				levsts. updatelevs(sts);
+
+				System.out.println("enter the employee id");
+				int epid=Integer.parseInt(sc.nextLine());
+				Showlevbal sh3=new Showlevbal(epid);
+				show.showbal(sh3);
 				break;
 				
-			case 4:
-				System.out.println("delete the leave request");
-				System.out.println("enter the leave request_id");
-				int res2=Integer.parseInt(sc.nextLine());
-				lev_status s1=new lev_status(res2);
-				levsts.deletelev(s1);
-				break;
+				//			case 3:
+//				System.out.println("update the leave request ");
+//				System.out.println("enter the status ");
+//				status=sc.nextLine();
+//				System.out.println("enter the request_id");
+//				res1= Integer.parseInt(sc.nextLine()); 
+//				
+//				
+//			    lev_status sts=new lev_status(status,res1);
+//				levsts.updatelevs(status, 	res1);
+//				break;
+//				
+//			case 4:
+//				System.out.println("delete the leave request");
+//				System.out.println("enter the leave request_id");
+//				int res2=Integer.parseInt(sc.nextLine());
+//				lev_status s1=new lev_status(res2);
+//				levsts.deletelev(s1);
+//				break;
 			
-			}
+			case 3:
 			
             System.out.println("Admin add new employee");
 			System.out.println(" 1.insert\n 2.update\n 3.delete \n 0.Exit");
@@ -267,7 +346,7 @@ public class login_main {
 				admi.deleteuser(emplog2);
 				break;
 				
-
+			}
 			}
 		}
 

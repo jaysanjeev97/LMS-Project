@@ -11,7 +11,7 @@ import com.lms_leave.leave_res;
 
 public class lev_statusdao {
 	
-	public void showLevres() {
+	public void showLevres1() {
 		
 		String show="select*from LEAVE_RES";
 		Connection con;
@@ -35,23 +35,42 @@ public class lev_statusdao {
 	}
 	
 //update
-	public void updatelevs(lev_status s2) throws ClassNotFoundException, SQLException {
+	public void updatelevs( String status,int request_id) throws ClassNotFoundException, SQLException {
 		String insertQuery="update lev_status set  status=? where request_id=?";
 		Connection con=lms_connection.getConnection();
 		PreparedStatement pstmt= con.prepareStatement(insertQuery);
-		pstmt.setInt(1, s2.getRequest_id());
-		pstmt.setString(2, s2.getStatus());
+		pstmt.setString(1, status);
+		pstmt.setInt(2, request_id);
+	
+	
+	    int  i=pstmt.executeUpdate();
+		System.out.println(i+ "updated");
+	
 	}
 		
 //delete
-		public void deletelev(lev_status s3) throws ClassNotFoundException, SQLException {
+		public void deletelev(lev_status s1) throws ClassNotFoundException, SQLException {
 			String insertQuery="delete from lev_status where request_id=?";
 			Connection con=lms_connection.getConnection();
 			PreparedStatement pstmt= con.prepareStatement(insertQuery);
-			pstmt.setInt(1, s3.getRequest_id());
+			pstmt.setInt(1, s1.getRequest_id());
 			int i=pstmt.executeUpdate();
 			System.out.println(i+ "deleted");
 		
 
 }
+		
+		public void insertLeaveStatus(int man,int emp_id,int request_id) throws ClassNotFoundException, SQLException {
+			
+			String insertQuery="insert into lev_status(manager_id,emp_id,request_id) values(?,?,?)";
+			Connection con=lms_connection.getConnection();
+			PreparedStatement pstmt= con.prepareStatement(insertQuery);
+			
+			
+			pstmt.setInt(1, man);
+			pstmt.setInt(2, emp_id);
+			pstmt.setInt(3,request_id);
+			int i=pstmt.executeUpdate();
+			System.out.println(i+ "inserted");
+		}
 }

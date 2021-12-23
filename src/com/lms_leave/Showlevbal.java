@@ -2,11 +2,13 @@ package com.lms_leave;
 
 public class Showlevbal {
 	
-	
+	private int lev;
 	private int emp_id;
 	private int causal_lev;
 	private int medical_lev;
 	private int causal_lev_bal;
+	
+
 	private int medi_lev_bal;
 	private int paid_lev;
 	public int getEmp_id() {
@@ -67,7 +69,34 @@ public class Showlevbal {
 		this.paid_lev = paid_lev;
 	}
 	
+	public Showlevbal( int causal_lev,int emp_id ) {
+		super();
+		this.emp_id = emp_id;
+		this.causal_lev = causal_lev;
+	}
+	public Showlevbal( int medical_lev,int emp_id , int medi_lev_bal) {
+		super();
+		this.emp_id = emp_id;
+		this.medical_lev = medical_lev;
+		this.medi_lev_bal = medi_lev_bal;
+	}
+	public Showlevbal(int emp_id, int causal_lev, int medical_lev, int medi_lev_bal, int paid_lev) {
+		super();
+		this.emp_id = emp_id;
+		this.causal_lev = causal_lev;
+		this.medical_lev = medical_lev;
+		this.medi_lev_bal = medi_lev_bal;
+		this.paid_lev = paid_lev;
+	}
+	public Showlevbal(int emp_id) {
+		super();
+		this.emp_id = emp_id;
+	}
+	
+	
+	
+	
+	}
 	
 
-}
  

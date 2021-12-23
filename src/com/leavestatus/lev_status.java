@@ -10,6 +10,8 @@ public class lev_status {
 	public int getManager_id() {
 		return manager_id;
 	}
+	
+	
 	public void setManager_id(int manager_id) {
 		this.manager_id = manager_id;
 	}
@@ -47,7 +49,7 @@ public class lev_status {
 		this.manager_id = manager_id;
 		this.emp_id = emp_id;
 	}
-	public lev_status(int request_id, String status) {
+	public lev_status(String status,int request_id ) {
 		super();
 		this.request_id = request_id;
 		this.status = status;
@@ -57,7 +59,12 @@ public class lev_status {
 		this.request_id = request_id;
 	}
 	
-	
+	public lev_status(int manager_id, int request_id, int emp_id) {
+		super();
+		this.manager_id = manager_id;
+		this.request_id = request_id;
+		this.emp_id = emp_id;
+	}
 	
 
 }

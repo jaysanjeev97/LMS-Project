@@ -87,6 +87,12 @@ public class leave_res {
 		this.to_date = to_date;
 		this.no_ofdays = no_ofdays;
 	}
+	public leave_res(int request_id, String status) {
+		super();
+		this.request_id = request_id;
+		this.status = status;
+	}
+	
 	
 	
 
