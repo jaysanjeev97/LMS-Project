@@ -1,4 +1,4 @@
-package com.lms_leave;
+package com.lms.model;
 
 import java.util.Date;
 

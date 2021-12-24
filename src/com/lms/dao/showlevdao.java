@@ -1,5 +1,9 @@
-package com.lms_leave;
+package com.lms.dao;
 
+
+import com.lms.connection.*;
+import com.lms.model.*;
+import com.lms.dao.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,27 +12,36 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lms.lms_connection;
+
 
 public class showlevdao {
 
-	public void insertleave(Showlevbal sb) throws ClassNotFoundException, SQLException {
+	public void insertleave(Showlevbal sb)  {
 
 		int CAUSAL_LEV_BAL = 0;
 		int MEDI_LEV_BAL = 0;
 		int PAID_LEV = 0;
 
 		String insertQuery = "insert into leave_bal(emp_id,CAUSAL_LEV_BAL,MEDI_LEV_BAL,PAID_LEV) values(?,?,?,?)";
-		Connection con = lms_connection.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(insertQuery);
-		pstmt.setInt(1, sb.getEmp_id());
-		pstmt.setInt(2, sb.getCausal_lev_bal());
-		pstmt.setInt(3, sb.getMedi_lev_bal());
-		pstmt.setInt(4, sb.getPaid_lev());
-		int i = pstmt.executeUpdate();
-		System.out.println("leave inserted");
-		pstmt.close();
-		con.close();
+		Connection con;
+		try {
+			con = lms_connection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(insertQuery);
+			pstmt.setInt(1, sb.getEmp_id());
+			pstmt.setInt(2, sb.getCausal_lev_bal());
+			pstmt.setInt(3, sb.getMedi_lev_bal());
+			pstmt.setInt(4, sb.getPaid_lev());
+			int i = pstmt.executeUpdate();
+			System.out.println("leave inserted");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	// update
 
@@ -103,16 +116,15 @@ public class showlevdao {
 		}
 	public void showbal(Showlevbal sh3) {
 
-		String query1 = "select emp_id,casual_lev,medical_lev,casual_lev_bal,medi_lev_bal,paid_lev from LEAVE_BAL where emp_id=? ";
+		String query1 = "select * from LEAVE_BAL where emp_id=? ";
 		Connection con;
 		try {
 			con = lms_connection.getConnection();
-			System.out.println(sh3.getEmp_id());
 			PreparedStatement stmt = con.prepareStatement(query1);
 			stmt.setInt(1, sh3.getEmp_id());
 			
 			
-			ResultSet rs = stmt.executeQuery(query1);
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				System.out.format("%-10s%-10s%-10s%-10s%-10s%-10s\n", rs.getInt(1), rs.getInt(2), rs.getInt(3),
 						rs.getInt(4), rs.getInt(5), rs.getInt(6));

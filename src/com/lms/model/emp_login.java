@@ -1,4 +1,4 @@
-package com.lms;
+package com.lms.model;
 
 public class emp_login {
 	
@@ -39,11 +39,10 @@ public class emp_login {
 	}
 	public emp_login() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
-	public emp_login(int emp_id, String emp_name, String emp_department, String emp_email, String emp_password) {
+	public emp_login(String emp_name, String emp_department, String emp_email, String emp_password) {
 		super();
-		this.emp_id = emp_id;
 		this.emp_name = emp_name;
 		this.emp_department = emp_department;
 		this.emp_email = emp_email;
@@ -54,9 +53,6 @@ public class emp_login {
 		this.emp_name = emp_name;
 		this.emp_password = emp_password;
 	}
-
-	
-	
 	public emp_login(int emp_id, String emp_department) {
 		super();
 		this.emp_id = emp_id;
@@ -67,8 +63,7 @@ public class emp_login {
 		this.emp_id = emp_id;
 	}
 	
-	}
-	
+}
 	
 	
 

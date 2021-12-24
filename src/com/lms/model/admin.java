@@ -1,4 +1,4 @@
-package com.lms;
+package com.lms.model;
 
 public class admin {
 

@@ -1,4 +1,5 @@
-package com.lms;
+package com.lms.connection;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
